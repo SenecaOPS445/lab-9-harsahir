@@ -1,0 +1,38 @@
+
+PLAY [localhost] ***************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Update Apache] ***********************************************************
+ok: [localhost]
+
+TASK [Remove tree package] *****************************************************
+changed: [localhost]
+
+TASK [Set hostname] ************************************************************
+ok: [localhost]
+
+TASK [Create new user with sudo access] ****************************************
+ok: [localhost]
+
+TASK [Ensure .ssh directory exists] ********************************************
+ok: [localhost]
+
+TASK [Copy SSH public key] *****************************************************
+ok: [localhost]
+
+TASK [Create lab directories] **************************************************
+ok: [localhost] => (item=1)
+ok: [localhost] => (item=2)
+ok: [localhost] => (item=3)
+ok: [localhost] => (item=4)
+ok: [localhost] => (item=5)
+ok: [localhost] => (item=6)
+ok: [localhost] => (item=7)
+ok: [localhost] => (item=8)
+ok: [localhost] => (item=9)
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

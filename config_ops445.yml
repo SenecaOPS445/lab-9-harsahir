@@ -1,0 +1,50 @@
+---
+- hosts: localhost
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+    - name: Update Apache
+      dnf:
+        name: httpd
+        state: latest
+
+    - name: Remove tree package  
+      dnf:
+        name: tree
+        state: absent
+
+    - name: Set hostname
+      hostname:
+        name: "hs100"
+
+    - name: Create new user with sudo access
+      user:
+        name: "hs100"
+        groups: wheel
+        state: present
+        
+    - name: Ensure .ssh directory exists
+      file:
+        path: "/home/hs100/.ssh"
+        state: directory
+        owner: "hs100"
+        group: "hs100"
+        mode: '0700'
+
+    - name: Copy SSH public key
+      copy:
+        src: "~/.ssh/id_rsa.pub"
+        dest: "/home/hs100/.ssh/authorized_keys"
+        owner: "hs100"
+        group: "hs100"
+        mode: '0600'
+
+    - name: Create lab directories
+      file:
+        path: "/home/hs100/ops445/lab{{ item }}"
+        state: directory
+        owner: "hs100"
+        group: "hs100"
+        mode: '0755'
+      loop: "{{ range(1, 10)|list }}"
